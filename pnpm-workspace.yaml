@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# pnpm >= 10 requires explicit approval for packages that run install scripts.
+# esbuild (used by Vite and Vitest) needs its native binary build step.
+allowBuilds:
+  esbuild: true
