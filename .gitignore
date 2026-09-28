@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+coverage/
+
+# Tauri / Rust
+target/
+**/src-tauri/target/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE/local
+.vscode/*.log
+.idea/
+
+# Temp
+tmp/
+temp/
+*.tmp
