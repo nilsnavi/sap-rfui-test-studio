@@ -1,0 +1,19 @@
+node_modules
+dist
+build
+coverage
+target
+reference
+pnpm-lock.yaml
+*.html
+src-tauri
+
+# Frozen authored documentation: specs, prompts, spikes and the accepted ADR are
+# reviewed as written, so code tasks must not restyle them.
+.ai/prompts
+docs/specs
+docs/spikes
+docs/architecture/ADR-001-modular-architecture.md
+
+# Editor/tool working trees (another checkout of this repository).
+.kilo

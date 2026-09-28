@@ -1,0 +1,10 @@
+# Rust build artifacts
+/target/
+
+# Tauri generated schemas and permissions
+/gen/
+
+# Local environment overrides
+.env
+.env.*
+!.env.example

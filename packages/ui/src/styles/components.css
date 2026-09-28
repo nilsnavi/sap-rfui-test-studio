@@ -1,0 +1,232 @@
+/* Reusable UI component styles. Only design tokens are allowed here — no literals. */
+
+/* ---------- StatusBadge ---------- */
+.ui-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-height-sm);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-inset);
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ui-status-badge--mono .ui-status-badge__label {
+  font-family: var(--font-mono);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ui-status-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ui-status-badge--neutral {
+  color: var(--status-neutral);
+}
+.ui-status-badge--info {
+  color: var(--status-info);
+  border-color: color-mix(in srgb, var(--status-info) 45%, var(--border-subtle));
+}
+.ui-status-badge--success {
+  color: var(--status-success);
+  border-color: color-mix(in srgb, var(--status-success) 45%, var(--border-subtle));
+}
+.ui-status-badge--warning {
+  color: var(--status-warning);
+  border-color: color-mix(in srgb, var(--status-warning) 45%, var(--border-subtle));
+}
+.ui-status-badge--danger {
+  color: var(--status-danger);
+  border-color: color-mix(in srgb, var(--status-danger) 50%, var(--border-subtle));
+}
+
+.ui-status-badge__label {
+  color: var(--text-primary);
+}
+
+.ui-status-badge--pending .ui-status-badge__dot {
+  animation: ui-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes ui-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- LoadingState ---------- */
+.ui-loading-state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  color: var(--text-secondary);
+}
+
+.ui-loading-state--compact {
+  padding: var(--space-3);
+  gap: var(--space-3);
+}
+
+.ui-loading-state__spinner {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent-default);
+  border-radius: 50%;
+  animation: ui-spin 0.9s linear infinite;
+}
+
+.ui-loading-state--compact .ui-loading-state__spinner {
+  width: 12px;
+  height: 12px;
+}
+
+.ui-loading-state__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-loading-state__label {
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+}
+
+.ui-loading-state__detail {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+}
+
+@keyframes ui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- EmptyState ---------- */
+.ui-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+}
+
+.ui-empty-state__marker {
+  width: 28px;
+  height: 2px;
+  background: var(--accent-default);
+}
+
+.ui-empty-state__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ui-empty-state__description,
+.ui-empty-state__note {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+}
+
+.ui-empty-state__note {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.ui-empty-state__action {
+  margin-top: var(--space-2);
+}
+
+/* ---------- ErrorBoundary ---------- */
+.ui-error-boundary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--status-danger) 45%, var(--border-subtle));
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+}
+
+.ui-error-boundary__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--status-danger);
+}
+
+.ui-error-boundary__message {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+}
+
+.ui-error-boundary__stack {
+  margin: 0;
+  padding: var(--space-3);
+  max-height: 180px;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--surface-canvas);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  white-space: pre-wrap;
+}
+
+.ui-error-boundary__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ---------- Shared button primitive ---------- */
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-height-md);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-panel);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+}
+
+.ui-button:hover:not(:disabled) {
+  border-color: var(--accent-default);
+  background: var(--accent-soft);
+}
+
+.ui-button:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}

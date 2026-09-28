@@ -1,0 +1,42 @@
+{
+  "name": "sap-rfui-test-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SAP RFUI Test Studio — desktop QA workbench for SAP EWM RFUI (architecture foundation)",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@12.6.0",
+  "scripts": {
+    "dev": "pnpm --filter @sap-rfui/desktop dev",
+    "build": "pnpm -r build",
+    "preview": "pnpm --filter @sap-rfui/desktop preview",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,css,json,md,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,css,json,md,yaml,yml}\"",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm --filter @sap-rfui/domain test:watch",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "desktop:dev": "pnpm --filter @sap-rfui/desktop tauri dev",
+    "desktop:build": "pnpm --filter @sap-rfui/desktop tauri build",
+    "icons:generate": "node scripts/generate-app-icons.mjs",
+    "verify": "pnpm check:architecture && pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
+    "vitest": "^3.2.4"
+  }
+}
