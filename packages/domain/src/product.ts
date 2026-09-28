@@ -4,8 +4,8 @@ import { unwrapOr } from "./result";
 /** Product identity constants shared by every layer above the Domain. */
 export const PRODUCT_NAME = "SAP RFUI Test Studio";
 
-/** Foundation release. Device profiles, SAP integration and automation follow later. */
-export const PRODUCT_VERSION_TEXT = "0.1.0";
+/** Device emulator release (M1): RT40/U2/WT6000/Custom profiles live; SAP integration follows. */
+export const PRODUCT_VERSION_TEXT = "0.2.0";
 
 export type ReleaseChannel = "development" | "beta" | "stable";
 

@@ -105,7 +105,6 @@ export function Dashboard({ app, health, settings, settingsSource, startedAt }: 
           <h3 className="panel__title">Ещё не реализовано</h3>
           <ul className="pending-list">
             <li>Подключение к SAP и WebView (спринт M2)</li>
-            <li>Профили устройств и оболочка эмулятора (спринт M1)</li>
             <li>Эмуляция клавиатуры и сканера (спринт M3)</li>
             <li>Управление тестовыми данными на SQLite (спринт M4)</li>
             <li>Recorder, воспроизведение, проверки, AI, Test IT (после MVP)</li>

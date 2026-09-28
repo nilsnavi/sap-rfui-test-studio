@@ -15,6 +15,7 @@ export default tseslint.config(
       "**/target/**",
       "**/src-tauri/target/**",
       "**/src-tauri/gen/**",
+      "**/.kilo/**",
       "reference/**",
       "**/*.html",
     ],

@@ -32,9 +32,8 @@ describe("Desktop shell (smoke)", () => {
     await screen.findByRole("heading", { name: "SAP RFUI Test Studio" });
 
     await user.click(screen.getByRole("button", { name: "Эмулятор" }));
-    expect(
-      await screen.findByText("Эмулятор устройства будет реализован в спринте M1."),
-    ).toBeDefined();
+    expect(await screen.findByTestId("device-screen")).toBeDefined();
+    expect((await screen.findByTestId("device-resolution")).textContent).toBe("244 × 400");
 
     await user.click(screen.getByRole("button", { name: "Настройки" }));
     expect(await screen.findByText("Редактор настроек не входит в базовую сборку")).toBeDefined();

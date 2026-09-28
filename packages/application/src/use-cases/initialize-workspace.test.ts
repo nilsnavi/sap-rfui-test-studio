@@ -22,8 +22,8 @@ describe("initializeWorkspace", () => {
     }
 
     expect(result.value.app.productName).toBe("SAP RFUI Test Studio");
-    expect(result.value.app.version).toBe("0.1.0");
-    expect(result.value.app.buildLabel).toBe("0.1.0 (development build)");
+    expect(result.value.app.version).toBe("0.2.0");
+    expect(result.value.app.buildLabel).toBe("0.2.0 (development build)");
     expect(result.value.settings.source).toBe("defaults");
     expect(result.value.health.state).toBe("OK");
     expect(result.value.health.checkedCount).toBe(3);
