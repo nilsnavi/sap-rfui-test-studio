@@ -36,8 +36,8 @@ function WorkspaceGate({ container }: AppProps): ReactNode {
   if (status === "initializing") {
     return (
       <LoadingState
-        label="Initializing SAP RFUI Test Studio"
-        detail="composing adapters · loading settings · probing subsystems"
+        label="Инициализация SAP RFUI Test Studio"
+        detail="подготовка адаптеров · загрузка настроек · проверка подсистем"
       />
     );
   }
@@ -47,18 +47,18 @@ function WorkspaceGate({ container }: AppProps): ReactNode {
       <section className="screen" aria-labelledby="startup-failed-title">
         <header className="screen__header">
           <h2 id="startup-failed-title" className="screen__title">
-            Foundation initialization failed
+            Не удалось инициализировать базовый слой
           </h2>
         </header>
         <div className="callout callout--danger" role="alert">
           <StatusBadge label={error?.code ?? "UNKNOWN"} tone="danger" mono />
-          <p className="callout__text">{error?.message ?? "Unknown startup failure"}</p>
+          <p className="callout__text">{error?.message ?? "Неизвестная ошибка запуска"}</p>
           <button
             type="button"
             className="ui-button"
             onClick={() => void store.getState().initialize()}
           >
-            Retry initialization
+            Повторить инициализацию
           </button>
         </div>
       </section>
@@ -66,7 +66,7 @@ function WorkspaceGate({ container }: AppProps): ReactNode {
   }
 
   return (
-    <ErrorBoundary title="Interface failure" onError={container.reportRenderError}>
+    <ErrorBoundary title="Сбой интерфейса" onError={container.reportRenderError}>
       <AppShell />
     </ErrorBoundary>
   );

@@ -52,6 +52,20 @@ describe("ErrorBoundary", () => {
     expect(screen.getByRole("button", { name: "Re-render" })).toBeDefined();
   });
 
+  it("falls back to Russian default copy, the product UI language", () => {
+    shouldThrow = true;
+
+    render(
+      <ErrorBoundary>
+        <Probe />
+      </ErrorBoundary>,
+    );
+
+    const alert = screen.getByRole("alert");
+    expect(alert.textContent).toContain("Сбой интерфейса");
+    expect(screen.getByRole("button", { name: "Повторить" })).toBeDefined();
+  });
+
   it("reports the error through the injected handler instead of a hardcoded sink", () => {
     const reported: Array<[string, ErrorBoundaryInfo]> = [];
     shouldThrow = true;

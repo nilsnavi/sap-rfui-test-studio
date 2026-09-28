@@ -26,6 +26,8 @@ interface ErrorBoundaryState {
 /**
  * Containment boundary for a subtree. Keeps a rendering failure from taking down
  * the whole shell and normalizes the thrown value into an `Error`.
+ *
+ * Fallback copy is Russian: the product UI language (architecture baseline).
  */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   override state: ErrorBoundaryState = { error: null };
@@ -52,13 +54,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return this.props.fallback(error, this.reset);
     }
 
-    const title = this.props.title ?? "Interface failure";
-    const retryLabel = this.props.retryLabel ?? "Retry";
+    const title = this.props.title ?? "Сбой интерфейса";
+    const retryLabel = this.props.retryLabel ?? "Повторить";
 
     return (
       <div className="ui-error-boundary" role="alert">
         <h3 className="ui-error-boundary__title">{title}</h3>
-        <p className="ui-error-boundary__message">{error.message || "Unknown error"}</p>
+        <p className="ui-error-boundary__message">{error.message || "Неизвестная ошибка"}</p>
         <pre className="ui-error-boundary__stack">{error.stack ?? ""}</pre>
         <div className="ui-error-boundary__actions">
           <button type="button" className="ui-button" onClick={this.reset}>

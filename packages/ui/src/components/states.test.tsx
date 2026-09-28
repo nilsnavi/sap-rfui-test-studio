@@ -44,7 +44,8 @@ describe("LoadingState", () => {
   it("renders a fallback label when none is provided", () => {
     render(<LoadingState />);
 
-    expect(screen.getByRole("status").textContent).toContain("Loading");
+    // The product UI language is Russian (architecture baseline).
+    expect(screen.getByRole("status").textContent).toContain("Загрузка");
   });
 });
 

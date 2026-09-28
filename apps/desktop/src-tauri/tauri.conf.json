@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "SAP RFUI Test Studio — Development Build",
+        "title": "SAP RFUI Test Studio — версия для разработчиков",
         "label": "main",
         "width": 1280,
         "height": 800,
@@ -40,8 +40,8 @@
     "active": true,
     "targets": ["msi", "nsis"],
     "category": "DeveloperTool",
-    "shortDescription": "SAP RFUI test workbench — foundation build",
-    "longDescription": "Foundation build of SAP RFUI Test Studio: modular desktop workbench for SAP RFUI screen testing. Device emulation, scanning and recording are implemented in later milestones.",
+    "shortDescription": "Верстак тестирования SAP RFUI — базовая сборка",
+    "longDescription": "Базовая сборка SAP RFUI Test Studio: модульный десктопный верстак для тестирования экранов SAP RFUI. Эмуляция устройства, сканирование и запись сессий будут добавлены в последующих вехах.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

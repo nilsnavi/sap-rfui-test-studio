@@ -15,37 +15,37 @@ export function SettingsScreen({ settings, source }: SettingsScreenProps) {
     <section className="screen" aria-labelledby="settings-title">
       <header className="screen__header">
         <h2 id="settings-title" className="screen__title">
-          Settings
+          Настройки
         </h2>
         <p className="screen__subtitle">
-          Restored from local configuration · <code>app.settings.v1</code>
+          Восстановлено из локальной конфигурации · <code>app.settings.v1</code>
         </p>
       </header>
 
       <div className="grid">
         <article className="panel">
-          <h3 className="panel__title">Current values</h3>
+          <h3 className="panel__title">Текущие значения</h3>
           <dl className="kv">
             <div>
-              <dt>Schema version</dt>
+              <dt>Версия схемы</dt>
               <dd>{settings.schemaVersion}</dd>
             </div>
             <div>
-              <dt>Telemetry</dt>
+              <dt>Телеметрия</dt>
               <dd>
                 <StatusBadge
-                  label={settings.telemetryEnabled ? settings.telemetryLevel : "disabled"}
+                  label={settings.telemetryEnabled ? settings.telemetryLevel : "отключена"}
                   tone={settings.telemetryEnabled ? "info" : "neutral"}
                   mono
                 />
               </dd>
             </div>
             <div>
-              <dt>UI density</dt>
+              <dt>Плотность интерфейса</dt>
               <dd>{settings.uiDensity}</dd>
             </div>
             <div>
-              <dt>Loaded from</dt>
+              <dt>Загружено из</dt>
               <dd>{source}</dd>
             </div>
           </dl>
@@ -53,9 +53,9 @@ export function SettingsScreen({ settings, source }: SettingsScreenProps) {
 
         <article className="panel">
           <EmptyState
-            title="Settings editor is not part of the foundation build"
-            description="Editing, SAP environments and test data management are implemented in Sprint M4. Values above are validated by the application layer and persisted through StoragePort."
-            note="SPEC-001 §12 · ADR-001 Rule 13"
+            title="Редактор настроек не входит в базовую сборку"
+            description="Правка настроек, окружения SAP и управление тестовыми данными появятся в спринте M4. Значения выше проверяются прикладным слоем и сохраняются через StoragePort."
+            note="SPEC-001 §12 · ADR-001, правило 13"
           />
         </article>
       </div>

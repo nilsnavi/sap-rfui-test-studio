@@ -149,3 +149,47 @@ replay, assertions, AI assistant, Test IT, Regression Manager, reports/visual re
 PROMPT-002 (device profiles + RFUI screen model) on `feature/device-emulator`, after this bootstrap
 has been reviewed and merged. Extension points are listed in
 `docs/architecture/architecture-baseline.md` § 5.
+
+## 9. UI localization follow-up (same branch, after § 1–8)
+
+Follow-up task on `feature/bootstrap`: make the user-facing interface Russian. The rule is now
+frozen as decision 7 in `docs/architecture/architecture-baseline.md`.
+
+- Translated to Russian: three screens (`Dashboard`, `EmulatorScreen`, `SettingsScreen`), the shell
+  (`AppShell` navigation, `aria-label`s, status tooltip, footer), the startup states in `App.tsx`
+  (loading, failed, retry, `ErrorBoundary` title), the default copy of `packages/ui` components
+  (`Загрузка`, `Сбой интерфейса`, `Повторить`, `Неизвестная ошибка`), `index.html` `lang="ru"`, the
+  fatal `#root` message in `main.tsx`, and the user-visible strings in `tauri.conf.json` (window
+  title, bundle short/long description).
+- Kept in English on purpose (technical identifiers, per the rule): package and file names,
+  `StoragePort`/`TelemetryPort`, error codes (`UNKNOWN`, `CONFIGURATION_ERROR`), internal enum
+  values (`OK | DEGRADED | FAILED`, `development`, `defaults | stored`, `comfortable`,
+  `app.settings.v1`, `Custom`), technology names (Tauri, WebView, SQLite, Test IT, AI), sprint/spec
+  references, CLI commands, code comments and telemetry log messages.
+- No i18n framework, no key catalog, no runtime language switching: literals stay where they were,
+  only their language changed. Architecture, layering and business logic are untouched.
+- Presentation-only change: the topbar build badge now renders
+  `${app.version} · ${CHANNEL_LABELS[app.channel]}` instead of `AppInfoDto.buildLabel`, because the
+  English "development build" wording is produced in `packages/application`, which the task scoped
+  out. `buildLabel` itself is left as is.
+- Remaining English that can reach a user, all outside the declared scope and flagged for a
+  follow-up decision: `AppError.message` texts created in `packages/application`
+  (e.g. `Unable to read application settings from storage`) shown on the startup-failure screen
+  (that screen now frames them with a Russian heading and the Russian-labeled error code), and the
+  Rust-side diagnostics in `src-tauri/src/lib.rs`/`main.rs`, which appear only in a native panic.
+- Tests updated for the new copy: `apps/desktop/src/app/shell.test.tsx` (dashboard texts, Russian
+  nav buttons, failure heading) and `packages/ui/src/components/states.test.tsx` (default loading
+  label); one new regression test `falls back to Russian default copy, the product UI language` in
+  `error-boundary.test.tsx` — 57 tests total, up from 56.
+- Verification after the change: `pnpm typecheck`, `pnpm lint` (0 errors / 0 warnings), `pnpm test`,
+  `pnpm build`, `pnpm check:architecture`, `pnpm format:check` — all green. `pnpm desktop:build` was
+  re-run because `tauri.conf.json` is embedded at compile time: `Finished release profile in 2m 33s`,
+  MSI 1.57 MiB + NSIS 1.11 MiB, WiX/NSIS accepted the Cyrillic bundle text; the rebuilt binary
+  started with the window title `SAP RFUI Test Studio — версия для разработчиков` and closed
+  normally (exit code 0).
+- `docs/specs`, `.ai/prompts` and `docs/spikes` were not modified.
+- Two hygiene fixes came out of the verification runs: the residual hard-break/whitespace restyle of
+  `docs/architecture/ADR-001-modular-architecture.md` left in the working tree by the pre-ignore
+  `pnpm format` run of § 3.8 was reverted with `git restore` (the file now matches `HEAD` exactly),
+  and `.kilo` was added to `.prettierignore` because `pnpm format` was otherwise about to rewrite a
+  second checkout of the repository living under `.kilo/worktrees/`.

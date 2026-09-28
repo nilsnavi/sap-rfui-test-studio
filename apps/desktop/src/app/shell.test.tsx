@@ -20,8 +20,8 @@ describe("Desktop shell (smoke)", () => {
     const { container } = render(<App container={createTestContainer()} />);
 
     expect(await screen.findByRole("heading", { name: "SAP RFUI Test Studio" })).toBeDefined();
-    expect(container.textContent).toContain("Development Build");
-    expect(container.textContent).toContain("Architecture foundation ready");
+    expect(container.textContent).toContain("Сборка для разработчиков");
+    expect(container.textContent).toContain("Архитектурный фундамент готов");
     expect(container.textContent).toContain("StoragePort");
   });
 
@@ -31,17 +31,15 @@ describe("Desktop shell (smoke)", () => {
 
     await screen.findByRole("heading", { name: "SAP RFUI Test Studio" });
 
-    await user.click(screen.getByRole("button", { name: "Emulator" }));
+    await user.click(screen.getByRole("button", { name: "Эмулятор" }));
     expect(
-      await screen.findByText("Device emulator will be implemented in Sprint M1."),
+      await screen.findByText("Эмулятор устройства будет реализован в спринте M1."),
     ).toBeDefined();
 
-    await user.click(screen.getByRole("button", { name: "Settings" }));
-    expect(
-      await screen.findByText("Settings editor is not part of the foundation build"),
-    ).toBeDefined();
+    await user.click(screen.getByRole("button", { name: "Настройки" }));
+    expect(await screen.findByText("Редактор настроек не входит в базовую сборку")).toBeDefined();
 
-    await user.click(screen.getByRole("button", { name: "Dashboard" }));
+    await user.click(screen.getByRole("button", { name: "Панель" }));
     expect(screen.getByRole("heading", { name: "SAP RFUI Test Studio" })).toBeDefined();
   });
 
@@ -52,7 +50,7 @@ describe("Desktop shell (smoke)", () => {
     const { container } = render(<App container={createTestContainer(failingStorage)} />);
 
     expect(
-      await screen.findByRole("heading", { name: "Foundation initialization failed" }),
+      await screen.findByRole("heading", { name: "Не удалось инициализировать базовый слой" }),
     ).toBeDefined();
     expect(container.textContent).toContain("database is locked");
   });
@@ -75,7 +73,7 @@ describe("Desktop shell (smoke)", () => {
     render(<App container={createTestContainer(storage)} />);
 
     await screen.findByRole("heading", { name: "SAP RFUI Test Studio" });
-    await user.click(screen.getByRole("button", { name: "Settings" }));
+    await user.click(screen.getByRole("button", { name: "Настройки" }));
 
     expect(await screen.findByText("error")).toBeDefined();
     expect(screen.getByText("comfortable")).toBeDefined();

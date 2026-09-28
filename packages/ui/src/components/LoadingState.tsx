@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export interface LoadingStateProps {
   readonly label?: string;
-  /** Secondary line: current operation detail, e.g. `Restoring workspace settings`. */
+  /** Secondary line: current operation detail, e.g. `Загрузка настроек рабочего пространства`. */
   readonly detail?: string;
   /** Compact variant fits inside panels and table cells. */
   readonly compact?: boolean;
@@ -10,7 +10,7 @@ export interface LoadingStateProps {
 
 /** Accessible busy indicator. Timing and orchestration stay outside the UI layer. */
 export function LoadingState({
-  label = "Loading",
+  label = "Загрузка",
   detail,
   compact = false,
 }: LoadingStateProps): ReactNode {

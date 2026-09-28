@@ -93,6 +93,15 @@ components: `LoadingState`, `EmptyState`, `StatusBadge`, `ErrorBoundary`.
    has a build step. Typecheck and tests therefore need no build ordering.
 6. **Reference is not a dependency.** `reference/sap_rfui_emulator.html` is read-only legacy
    material for M1; nothing imports it and no code reads it at runtime.
+7. **Основной язык пользовательского интерфейса — русский.** Every user-facing string in
+   `apps/desktop` and `packages/ui` — screen copy, navigation, statuses, hints, onboarding and
+   error text shown to the user — is written in Russian. English remains acceptable for
+   technical identifiers only: file names, API and package names, error codes (`UNKNOWN`,
+   `CONFIGURATION_ERROR`), CLI commands, technology names (`Tauri`, `SQLite`, `WebView`) and
+   internal enum values (`OK | DEGRADED | FAILED`, `development`, `comfortable`, `app.settings.v1`).
+   In M0 the copy is plain literals: no i18n framework is introduced, and adding one is out of
+   scope until a real second locale is required. Telemetry messages and code comments stay
+   English because they are developer-facing diagnostics, not UI.
 
 ## 4. Guard
 

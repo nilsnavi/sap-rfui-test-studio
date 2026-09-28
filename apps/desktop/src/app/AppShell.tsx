@@ -1,3 +1,4 @@
+import type { ReleaseChannel } from "@sap-rfui/domain";
 import { StatusBadge } from "@sap-rfui/ui";
 import type { StatusTone } from "@sap-rfui/ui";
 
@@ -8,15 +9,22 @@ import { useWorkspace, useWorkspaceStore } from "../state/store-context";
 import type { ScreenId } from "../state/workspace-store";
 
 const NAVIGATION: ReadonlyArray<{ id: ScreenId; label: string }> = [
-  { id: "dashboard", label: "Dashboard" },
-  { id: "emulator", label: "Emulator" },
-  { id: "settings", label: "Settings" },
+  { id: "dashboard", label: "Панель" },
+  { id: "emulator", label: "Эмулятор" },
+  { id: "settings", label: "Настройки" },
 ];
 
 const HEALTH_TONE: Record<"OK" | "DEGRADED" | "FAILED", StatusTone> = {
   OK: "success",
   DEGRADED: "warning",
   FAILED: "danger",
+};
+
+/** Release channel is a technical value; only its visible rendering is localized. */
+const CHANNEL_LABELS: Record<ReleaseChannel, string> = {
+  development: "версия разработки",
+  beta: "бета-версия",
+  stable: "стабильная версия",
 };
 
 export function AppShell() {
@@ -36,9 +44,9 @@ export function AppShell() {
       <header className="topbar">
         <div className="topbar__identity">
           <span className="topbar__name">{app.productName}</span>
-          <StatusBadge label={app.buildLabel} tone="info" mono />
+          <StatusBadge label={`${app.version} · ${CHANNEL_LABELS[app.channel]}`} tone="info" mono />
         </div>
-        <nav className="topbar__nav" aria-label="Primary">
+        <nav className="topbar__nav" aria-label="Основная навигация">
           {NAVIGATION.map((item) => (
             <button
               key={item.id}
@@ -57,7 +65,7 @@ export function AppShell() {
           <StatusBadge
             label={health.state}
             tone={HEALTH_TONE[health.state]}
-            title="Subsystem health"
+            title="Состояние подсистем"
           />
         </div>
       </header>
@@ -79,11 +87,11 @@ export function AppShell() {
       </main>
 
       <footer className="statusbar">
-        <span>Sprint M0 · repository foundation</span>
+        <span>Спринт M0 · фундамент репозитория</span>
         <span className="statusbar__sep" aria-hidden="true">
           ·
         </span>
-        <span>Next: PROMPT-002 device profiles</span>
+        <span>Далее: PROMPT-002 — профили устройств</span>
       </footer>
     </div>
   );

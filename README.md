@@ -35,6 +35,12 @@ Implemented:
 
 The Emulator screen is a placeholder that states this explicitly.
 
+**Язык интерфейса — русский.** Все пользовательские тексты приложения (экраны, навигация,
+статусы, подсказки, сообщения об ошибках) написаны по-русски. Без перевода остаются только
+технические идентификаторы: имена файлов и пакетов, API, коды ошибок, команды, названия
+технологий и внутренние enum-значения. См. правило 7 в
+[architecture baseline](docs/architecture/architecture-baseline.md).
+
 ## Architecture
 
 Dependency direction (see [ADR-001](docs/architecture/ADR-001-modular-architecture.md) and

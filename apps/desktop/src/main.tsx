@@ -9,7 +9,7 @@ import { createContainer } from "./app/composition/container";
 
 const rootElement = document.getElementById("root");
 if (rootElement === null) {
-  throw new Error("Root container #root is missing in index.html");
+  throw new Error("Не найден корневой контейнер #root в index.html");
 }
 
 // Single composition root instance for the window lifetime (ADR-001 §7).
