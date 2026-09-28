@@ -1,6 +1,6 @@
 {
   "name": "@sap-rfui/desktop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "SAP RFUI Test Studio desktop shell: Tauri + React composition root, adapters and screens",
   "type": "module",

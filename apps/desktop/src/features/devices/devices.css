@@ -1,0 +1,321 @@
+/* Device Emulator feature styles (PROMPT-002).
+   Shell proportions and keypad colors migrate from
+   reference/sap_rfui_emulator.html; theme colors come from design tokens. */
+
+.devices {
+  display: flex;
+  gap: var(--space-6);
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.devices__controls {
+  flex: 0 1 380px;
+  min-width: 300px;
+  max-width: 440px;
+}
+
+.devices__stage {
+  flex: 1 1 480px;
+  min-width: 320px;
+  min-height: 0;
+  display: flex;
+}
+
+/* ---------- Forms ---------- */
+.devices-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.devices-field__label {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.devices-field__control {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-inset);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+}
+
+.devices-custom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+}
+
+.devices-custom__title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.devices-custom__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: var(--space-3);
+  align-items: end;
+}
+
+.devices-custom__hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.devices-custom__error {
+  margin: 0;
+  color: var(--status-danger);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Left-panel visual hierarchy ---------- */
+.devices-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.devices-group__title {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Device stage, viewport and shell (presentation layer) ---------- */
+.device-stage {
+  flex: 1;
+  min-width: 0;
+  height: clamp(540px, 70vh, 780px);
+  display: flex;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+  overflow: hidden;
+}
+
+.device-viewport {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  /* ≥ 32 px breathing room; ResizeObserver's contentRect excludes it. */
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.device-viewport__sizer {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.device-shell {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.device-shell--photo {
+  background: transparent;
+  /* The calibration frame draws the source PNG oversized/offset; the shell
+     clips it so only the device body crop is visible (legacy clip-path). */
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Photo shells: the legacy asset positioned by the per-device calibration
+   frame (inline left/top/width/height override these inset defaults). */
+.device-shell__photo {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.device-shell--neutral {
+  border: 2px solid #4b5058;
+  background: linear-gradient(145deg, #30343a, #17191d 55%, #0e0f12);
+  box-shadow:
+    inset 0 2px 1px rgba(255, 255, 255, 0.12),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+    0 28px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Legacy `.terminal` furniture, ported at authored px sizes (shell renders
+   unscaled inside the transform wrapper, so fixed px stay proportional). */
+.device-shell__speaker {
+  position: absolute;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 6px;
+  border-radius: 6px;
+  background: #090a0c;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.device-shell__bezel {
+  position: absolute;
+  border-radius: 14px;
+  background: #050607;
+  border: 2px solid #111318;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.device-shell__grip {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 8px;
+  height: 14px;
+  border-radius: 8px;
+  background: linear-gradient(#101215, #23262c);
+  opacity: 0.9;
+}
+
+.device-shell__keypad-slot {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+}
+
+/* ---------- Screen (presentation overlay) ---------- */
+/* The overlay is the device glass: dark base, clipped by its own rounded
+   bezel, so the screen background never spills over the shell. */
+.device-screen {
+  background: #05060a;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.device-screen--photo {
+  /* Radius comes from the per-device calibration (inline style); this is the
+     fallback for photo shells without a calibration entry. */
+  border-radius: 8px;
+}
+
+.device-screen--neutral {
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 2px rgba(0, 0, 0, 0.45);
+}
+
+.device-screen__content {
+  position: absolute;
+  background: #fff;
+  overflow: hidden;
+}
+
+.device-screen__label {
+  position: absolute;
+  left: 10px;
+  bottom: 7px;
+  z-index: 4;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #e7ebef;
+  font-size: 10px;
+  pointer-events: none;
+}
+
+/* ---------- Keypad (visual only) ---------- */
+.device-keypad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-content: start;
+}
+
+.device-keypad__key {
+  height: 43px;
+  border-radius: 9px;
+  background: linear-gradient(#343941, #1c1f24);
+  border: 1px solid #505660;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.45);
+  color: #f3f5f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  user-select: none;
+}
+
+.device-keypad__key--enter {
+  background: linear-gradient(#267a48, #174c2e);
+  border-color: #398e5b;
+}
+
+.device-keypad__key--esc {
+  background: linear-gradient(#8f3535, #5e1f1f);
+  border-color: #a54c4c;
+}
+
+.device-keypad__key--fn {
+  background: linear-gradient(#a8862b, #6b5518);
+  border-color: #b89c49;
+}
+
+.device-keypad__key--scan {
+  grid-column: span 2;
+  background: linear-gradient(#2c679c, #183f61);
+  border-color: #3b7bb1;
+}
+
+/* ---------- RFUI placeholder ---------- */
+/* Neutral light-gray RFUI surface — deliberately not a blank white page,
+   and not a SAP mock. */
+.rfui-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #e9edf1 0%, #dde3e9 100%);
+  color: #24292f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.rfui-placeholder__title {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.rfui-placeholder__size {
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.rfui-placeholder__note {
+  max-width: 80%;
+  text-align: center;
+  font-size: 12px;
+  color: #57606a;
+}

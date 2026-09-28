@@ -87,11 +87,11 @@ export function AppShell() {
       </main>
 
       <footer className="statusbar">
-        <span>Спринт M0 · фундамент репозитория</span>
+        <span>Спринт M1 · эмулятор устройств</span>
         <span className="statusbar__sep" aria-hidden="true">
           ·
         </span>
-        <span>Далее: PROMPT-002 — профили устройств</span>
+        <span>Далее: SPIKE-001 — управляемый WebView для SAP RFUI</span>
       </footer>
     </div>
   );

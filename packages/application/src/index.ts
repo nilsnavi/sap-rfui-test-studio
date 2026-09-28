@@ -25,6 +25,13 @@ export type { AppInfoDto } from "./queries/app-info";
 export { getAppInfo } from "./queries/app-info";
 
 export type {
+  CustomScreenSize,
+  DeviceSelection,
+  SelectDeviceRequest,
+} from "./device/select-device";
+export { customScreenSizeSchema, selectDevice } from "./device/select-device";
+
+export type {
   WorkspaceStartupDependencies,
   WorkspaceStartupReport,
   WorkspaceStartupRequest,

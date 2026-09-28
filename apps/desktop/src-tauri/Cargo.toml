@@ -1,7 +1,7 @@
 [package]
 name = "sap-rfui-test-studio"
 description = "SAP RFUI Test Studio — desktop test workbench for SAP RFUI screens (foundation build)"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["SAP RFUI Test Studio"]
 edition = "2021"
 rust-version = "1.77.2"
