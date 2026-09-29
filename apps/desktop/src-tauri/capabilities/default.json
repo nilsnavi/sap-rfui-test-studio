@@ -1,7 +1,16 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Least-privilege capability set for the foundation build. The front end opens no extra windows, reads no filesystem paths and invokes no custom native commands, so only the core defaults are granted.",
+  "description": "Least-privilege capability set. Foundation windows get core defaults only; the SPIKE-001 experimental SAP runtime adds the custom spike_* commands (see permissions/spike.toml), granted exclusively to the local main window. The remote 'sap-spike' webview window is deliberately NOT listed: it receives no IPC and is driven only through host-native eval from the Rust layer.",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": [
+    "core:default",
+    "allow-open",
+    "allow-is-open",
+    "allow-close",
+    "allow-reload",
+    "allow-eval",
+    "allow-send-key",
+    "allow-screenshot"
+  ]
 }

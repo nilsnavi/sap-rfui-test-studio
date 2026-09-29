@@ -5,7 +5,10 @@ import { getAppInfo, initializeWorkspace, saveAppSettings } from "@sap-rfui/appl
 import type { ReleaseChannel, Result } from "@sap-rfui/domain";
 import type { StoragePort, TelemetryLogger, TelemetryPort } from "@sap-rfui/ports";
 import { createTelemetryLogger, parseTelemetryLevel } from "@sap-rfui/ports";
+import type { SapPort } from "@sap-rfui/ports";
 
+import { ExperimentalSapAdapter } from "../../adapters/experimental-sap-adapter";
+import { isTauriEnvironment } from "../../adapters/sap-runtime-backend";
 import { ConsoleTelemetryAdapter } from "../../adapters/console-telemetry-adapter";
 import { InMemoryStorageAdapter, WebStorageAdapter } from "../../adapters/web-storage-adapter";
 
@@ -21,6 +24,12 @@ export interface AppContainer {
   readonly storage: StoragePort;
   readonly telemetry: TelemetryLogger;
   readonly appInfo: ReturnType<typeof getAppInfo>;
+  /**
+   * SPIKE-001 only: the controlled SAP RFUI runtime port.
+   * `null` when the app is not running inside the Tauri shell — the spike
+   * feature must degrade to "runtime unavailable" instead of pretending.
+   */
+  readonly sap: SapPort | null;
   /** Failures travel as `Result`, never as exceptions, across the UI boundary. */
   initialize(): Promise<Result<WorkspaceStartupReport>>;
   persistSettings(settings: AppSettings): Promise<Result<AppSettings>>;
@@ -54,6 +63,8 @@ function resolveStorage(logger: TelemetryLogger): StoragePort {
 export interface ContainerOverrides {
   readonly telemetryPort?: TelemetryPort;
   readonly storage?: StoragePort;
+  /** SPIKE-001 test seam: a fake/absent controlled SAP runtime. */
+  readonly sap?: SapPort | null;
 }
 
 export function createContainer(overrides: ContainerOverrides = {}): AppContainer {
@@ -68,10 +79,16 @@ export function createContainer(overrides: ContainerOverrides = {}): AppContaine
   const telemetry = rootLogger.child("application");
   const deps = { storage, telemetry };
 
+  // SPIKE-001: the experimental SAP adapter is instantiated only for the native
+  // Tauri runtime; a plain browser (vite dev, unit tests) has no WebView to drive.
+  const sap: SapPort | null =
+    overrides.sap ?? (isTauriEnvironment() ? new ExperimentalSapAdapter() : null);
+
   return {
     channel,
     storage,
     telemetry,
+    sap,
     appInfo: getAppInfo(channel),
 
     async initialize() {

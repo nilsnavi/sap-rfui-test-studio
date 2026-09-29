@@ -1,0 +1,38 @@
+"$schema" = "https://schema.tauri.app/permission/version/2"
+"$schema-version" = "2.0.0"
+# SPIKE-001 experimental SAP runtime commands (see src/spike_runtime.rs).
+# Granted only to the local `main` window via capabilities/default.json.
+[[permission]]
+identifier = "allow-open"
+description = "Opens the controlled SAP RFUI webview window (SPIKE-001 experimental runtime layer)."
+commands.allow = ["spike_open"]
+
+[[permission]]
+identifier = "allow-is-open"
+description = "Checks whether the controlled SAP RFUI webview window is open."
+commands.allow = ["spike_is_open"]
+
+[[permission]]
+identifier = "allow-close"
+description = "Closes the controlled SAP RFUI webview window."
+commands.allow = ["spike_close"]
+
+[[permission]]
+identifier = "allow-reload"
+description = "Reloads the controlled SAP RFUI webview window."
+commands.allow = ["spike_reload"]
+
+[[permission]]
+identifier = "allow-eval"
+description = "Evaluates adapter-authored scripts inside the controlled SAP webview (SPIKE-001; sources are bundled constants, never user input)."
+commands.allow = ["spike_eval"]
+
+[[permission]]
+identifier = "allow-send-key"
+description = "Injects one RFUI keystroke (Enter/Escape/F1-F12) into the focused controlled SAP window through OS SendInput (SPIKE-001 EXP-006/EXP-007)."
+commands.allow = ["spike_send_key"]
+
+[[permission]]
+identifier = "allow-screenshot"
+description = "Captures the controlled SAP webview window into the app cache evidence directory."
+commands.allow = ["spike_screenshot"]
