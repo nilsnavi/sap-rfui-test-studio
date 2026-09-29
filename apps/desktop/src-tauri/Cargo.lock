@@ -2519,10 +2519,14 @@ dependencies = [
 name = "sap-rfui-test-studio"
 version = "0.2.0"
 dependencies = [
+ "base64 0.22.1",
  "serde",
  "serde_json",
  "tauri",
  "tauri-build",
+ "url",
+ "webview2-com",
+ "windows",
 ]
 
 [[package]]

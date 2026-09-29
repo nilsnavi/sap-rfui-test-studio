@@ -1,12 +1,14 @@
-//! Minimal Tauri shell for SAP RFUI Test Studio.
+//! Tauri shell for SAP RFUI Test Studio.
 //!
-//! Deliberately empty of business logic: the foundation build (PROMPT-001)
-//! keeps every rule inside the TypeScript layers (`domain`, `application`,
-//! `ports`) so the Rust side is only a window host. Device emulation, SAP
-//! WebView hosting, recording and replay arrive in later sprints and will add
-//! native capabilities here one at a time.
+//! Product behaviour lives in the TypeScript layers (`domain`, `application`,
+//! `ports`); the Rust side is a thin window host plus one experimental native
+//! module — `spike_runtime` — which backs SPIKE-001 (controlled SAP RFUI
+//! WebView, Path A). Device emulation, recording and replay stay in the
+//! front end.
 
 use tauri::Manager;
+
+mod spike_runtime;
 
 /// Crate version, taken from `Cargo.toml` and therefore always in sync with
 /// `tauri.conf.json` during a release bump.
@@ -25,6 +27,15 @@ pub fn run() {
             let _ = window.title();
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![
+            spike_runtime::spike_open,
+            spike_runtime::spike_is_open,
+            spike_runtime::spike_close,
+            spike_runtime::spike_reload,
+            spike_runtime::spike_eval,
+            spike_runtime::spike_send_key,
+            spike_runtime::spike_screenshot,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running SAP RFUI Test Studio");
 }

@@ -1,3 +1,27 @@
+export type {
+  SapActiveField,
+  SapAuthState,
+  SapControlSnapshot,
+  SapError,
+  SapFieldSnapshot,
+  SapFrameSnapshot,
+  SapInjectionReceipt,
+  SapKey,
+  SapKeyDeliveryReceipt,
+  SapNavigationWatch,
+  SapOpenOptions,
+  SapPort,
+  SapPortErrorCode,
+  SapProbeResult,
+  SapResult,
+  SapScreenChange,
+  SapScreenState,
+  SapRuntimeInfo,
+  SapSessionState,
+  ScreenshotReceipt,
+} from "./sap/sap-port";
+export { isCertificateFailureMessage, sapErr, sapOk } from "./sap/sap-port";
+
 export type { StoragePort, StorageValue } from "./storage-port";
 
 export type { FileStat, FileStoragePort, FilePath } from "./file-storage-port";

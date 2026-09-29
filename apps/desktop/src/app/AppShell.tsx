@@ -4,6 +4,7 @@ import type { StatusTone } from "@sap-rfui/ui";
 
 import { Dashboard } from "../screens/Dashboard";
 import { EmulatorScreen } from "../screens/EmulatorScreen";
+import { SapSpikeScreen } from "../screens/SapSpikeScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
 import { useWorkspace, useWorkspaceStore } from "../state/store-context";
 import type { ScreenId } from "../state/workspace-store";
@@ -12,6 +13,8 @@ const NAVIGATION: ReadonlyArray<{ id: ScreenId; label: string }> = [
   { id: "dashboard", label: "Панель" },
   { id: "emulator", label: "Эмулятор" },
   { id: "settings", label: "Настройки" },
+  // SPIKE-001 (P0 architecture gate) — temporary experimental entry.
+  { id: "sap-spike", label: "SPIKE-001" },
 ];
 
 const HEALTH_TONE: Record<"OK" | "DEGRADED" | "FAILED", StatusTone> = {
@@ -84,6 +87,7 @@ export function AppShell() {
         {activeScreen === "settings" ? (
           <SettingsScreen settings={settings.settings} source={settings.source} />
         ) : null}
+        {activeScreen === "sap-spike" ? <SapSpikeScreen /> : null}
       </main>
 
       <footer className="statusbar">
